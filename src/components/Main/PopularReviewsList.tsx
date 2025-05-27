@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import PopularReviewCard from "./PopularReviewCard";
 import profileImg from "../../assets/mainporfile.svg";
 import { useNavigate } from "react-router-dom";
+import LoadingPage from "../../pages/LoadingPage";
 
 const PopularReviewsList = () => {
   const [reviews, setReviews] = useState<any[]>([]);
@@ -64,7 +65,7 @@ const PopularReviewsList = () => {
     return () => clearInterval(intervalId);
   }, [reviews]);
 
-  if (loading) return <p>로딩 중...</p>;
+  if (loading) return <LoadingPage />;
   if (error) return <p>에러 발생: {error}</p>;
 
   // 리뷰 배열 2배로 늘리기
@@ -87,7 +88,7 @@ const PopularReviewsList = () => {
 
       <div
         ref={scrollContainerRef}
-        className="flex overflow-x-auto whitespace-nowrap px-2 scroll-smooth"
+        className="flex overflow-x-auto whitespace-nowrap px-2 scroll-smooth py-2"
         style={{
           scrollBehavior: "auto",
           scrollbarWidth: "none",
