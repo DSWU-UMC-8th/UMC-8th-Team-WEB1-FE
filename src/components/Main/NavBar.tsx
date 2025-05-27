@@ -15,12 +15,12 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     const path = location.pathname;
 
-    if (path.startsWith("/review/popular")) {
-      setActiveMenu("/review/popular");
-    } else if (path.startsWith("/review/latest")) {
-      setActiveMenu("/review/latest");
-    } else if (path.startsWith("/review")) {
-      setActiveMenu("/review");
+    if (path.startsWith("/reviews/popular")) {
+      setActiveMenu("/reviews/popular");
+    } else if (path.startsWith("/reviews/latest")) {
+      setActiveMenu("/reviews/latest");
+    } else if (path.startsWith("/reviews")) {
+      setActiveMenu("/reviews");
     } else {
       setActiveMenu("/");
     }
@@ -37,9 +37,9 @@ const Navbar: React.FC = () => {
           <img src={LogoImage} alt="Logo" className="w-[200px] min-w-[160px]" />
         </Link>
         <Link
-          to="/review"
-          onClick={() => handleMenuClick("/review")}
-          className={activeMenu === "/review" ? "bg-[#c0e5c7] rounded-md" : ""}
+          to="/reviews"
+          onClick={() => handleMenuClick("/reviews")}
+          className={activeMenu === "/reviews" ? "bg-[#c0e5c7] rounded-md" : ""}
         >
           <img
             src={Dashboard}
@@ -48,10 +48,10 @@ const Navbar: React.FC = () => {
           />
         </Link>
         <Link
-          to="/review/popular"
-          onClick={() => handleMenuClick("/review/popular")}
+          to="/reviews/popular"
+          onClick={() => handleMenuClick("/reviews/popular")}
           className={
-            activeMenu === "/review/popular" ? "bg-[#c0e5c7] rounded-md" : ""
+            activeMenu === "/reviews/popular" ? "bg-[#c0e5c7] rounded-md" : ""
           }
         >
           <img
@@ -61,10 +61,10 @@ const Navbar: React.FC = () => {
           />
         </Link>
         <Link
-          to="/review/latest"
-          onClick={() => handleMenuClick("/review/latest")}
+          to="/reviews/latest"
+          onClick={() => handleMenuClick("/reviews/latest")}
           className={
-            activeMenu === "/review/latest" ? "bg-[#c0e5c7] rounded-md" : ""
+            activeMenu === "/reviews/latest" ? "bg-[#c0e5c7] rounded-md" : ""
           }
         >
           <img

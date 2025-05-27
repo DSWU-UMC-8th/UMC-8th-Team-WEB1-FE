@@ -42,8 +42,8 @@ const PopularReviewsList = () => {
     if (!scrollContainer) return;
     if (reviews.length === 0) return;
 
-    let scrollStep = 1; // 한 번에 스크롤할 px 양
-    let delay = 40; // 스크롤 주기 (ms)
+    const scrollStep = 1; // 한 번에 스크롤할 px 양
+    const delay = 40; // 스크롤 주기 (ms)
 
     // 한 세트 너비 = 전체 스크롤 너비의 절반 (배열을 2배 렌더링했기 때문)
     const singleSetWidth = scrollContainer.scrollWidth / 2;
@@ -52,7 +52,7 @@ const PopularReviewsList = () => {
       if (!scrollContainer) return;
 
       // 현재 스크롤 위치 + 스텝
-      let newScrollLeft = scrollContainer.scrollLeft + scrollStep;
+      const newScrollLeft = scrollContainer.scrollLeft + scrollStep;
 
       if (newScrollLeft >= singleSetWidth) {
         // 한 세트를 넘어가면 스크롤 위치를 처음 세트 시작 위치로 점프
@@ -79,7 +79,7 @@ const PopularReviewsList = () => {
           type="button"
           className="text-sm text-gray-500 hover:text-gray-800 transition  cursor-pointer"
           onClick={() => {
-            navigate("/review/latest");
+            navigate("/reviews/latest");
           }}
         >
           전체보기 &gt;
@@ -116,7 +116,7 @@ const PopularReviewsList = () => {
               content={review.content}
               teacherName={review.teacher}
               teacherImage={review.imageUrl ? review.imageUrl : profileImg}
-              onClick={() => navigate(`/review/${review.reviewId}`)}
+              onClick={() => navigate(`/reviews/${review.reviewId}`)}
             />
           </div>
         ))}

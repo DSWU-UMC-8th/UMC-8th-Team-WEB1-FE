@@ -4,6 +4,8 @@ import RootLayout from "./layout/RootLayout";
 import NotFoundPage from "./pages/NotFoundPage";
 import Main from "./pages/Main";
 import Reviews from "./pages/Review/Reviews";
+import ReviewLatest from "./pages/Review/Review_latest";
+import ReviewPopular from "./pages/Review/Review_popular";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +17,18 @@ const router = createBrowserRouter([
         index: true,
         element: <Main />,
       },
-      {
-        path: "review",
+      
+        {
+        path: "reviews/latest",  
+        element: <ReviewLatest />,
+      },
+       {
+        path: "reviews/popular",  
+        element: <ReviewPopular />,
+      },
+  
+        {
+        path: "reviews/:reviewId",  
         element: <Reviews />,
       },
     ],
