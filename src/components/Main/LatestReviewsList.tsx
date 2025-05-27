@@ -36,9 +36,9 @@ const LatestReviewsList: React.FC<LatestReviewsListProps> = ({
 
     try {
       const data = await fetchLatestReviews({
-        category,
-        level: difficulty,
-        studyTime: entryPeriod,
+        category: category || "",
+        level: difficulty || "",
+        studyTime: entryPeriod || "",
         pageNumber: 0,
       });
       setReviews(data);
