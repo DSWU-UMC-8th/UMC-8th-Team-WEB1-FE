@@ -72,7 +72,7 @@ const PopularReviewsList = () => {
   const extendedReviews = [...reviews, ...reviews];
 
   return (
-    <div className="px-4 py-8 bg-[#f7f8f9]">
+    <div className="px-4 py-8 bg-[#f7f8f9] font-[Pretendard]">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold text-[#2d2d2d]">인기 리뷰</h2>
         <button
