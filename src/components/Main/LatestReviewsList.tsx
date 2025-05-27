@@ -26,9 +26,9 @@ const LatestReviewsList: React.FC = () => {
 
     try {
       const data = await fetchLatestReviews({
-        category: "ITPROGRAMMING",
-        level: "BEGINNER",
-        studyTime: "WITHIN_ONE_WEEK",
+        category: "",
+        level: "",
+        studyTime: "",
         pageNumber: 0,
       });
       setReviews(data);
