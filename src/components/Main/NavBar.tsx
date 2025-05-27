@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-[#F7F8F9] px-4 md:px-12 py-4 flex flex-wrap justify-between items-center">
+    <nav className="bg-[#F7F8F9] px-4 md:px-12 py-4 flex flex-wrap justify-between items-center w-full">
       <div className="flex items-center gap-6 md:gap-16 flex-wrap">
         <Link to="/">
           <img src={LogoImage} alt="Logo" className="w-[200px] min-w-[160px]" />
@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
         </Link>
       </div>
 
-      <div className="flex items-center  bg-white rounded-full px-4 py-2 w-full max-w-[400px] mt-4 md:mt-0">
+      <div className="flex items-center rounded-full px-4 py-2 w-full max-w-[400px] mt-4 md:mt-0">
         <button onClick={handleSearch} className="mr-2">
           <img src={SearchIcon} alt="Search" className="w-5 sm:w-4" />
         </button>
