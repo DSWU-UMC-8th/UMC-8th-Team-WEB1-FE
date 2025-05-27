@@ -4,6 +4,8 @@ import feedback from "../../assets/feedback.png"; // 기본 상태 (아직 안�
 import feedbackbad from "../../assets/feedback-bad.png"; // 싫어요 눌린 상태
 import feedbackgood from "../../assets/feedback-good.png"; // 좋아요 눌린 상태
 import good from "../../assets/good.png";
+import halfStarImg from "../../assets/halfstar.png";  // 반쪽별 이미지 경로 맞게 수정
+
 
 interface Review {
   reviewId: number;
@@ -79,21 +81,36 @@ const LatestReviewCard: React.FC<LatestReviewCardProps> = ({ review, onClick }) 
       {/* 1. 상단 아이콘 + 별점 */}
       <div className="flex items-center gap-3 mb-3">
         <img src={Logo} alt="Review logo" className="w-[20px] h-[20px]" />
-        <div className="flex items-center">
-          {[...Array(fullStars)].map((_, i) => (
-            <span key={`full-${i}`} className="text-lime-400 text-[20px] leading-none">
-              ★
-            </span>
-          ))}
-          {hasHalfStar && (
-            <span className="text-lime-400 text-[20px] leading-none">☆</span>
-          )}
-          {[...Array(emptyStars)].map((_, i) => (
-            <span key={`empty-${i}`} className="text-gray-300 text-[20px] leading-none">
-              ★
-            </span>
-          ))}
-        </div>
+      <div className="flex items-center">
+  {[...Array(fullStars)].map((_, i) => (
+    <span
+      key={`full-${i}`}
+      className="text-[20px]"
+      style={{ color: '#B4D780', lineHeight: 1, verticalAlign: 'middle', display: 'inline-block' }}
+    >
+      ★
+    </span>
+  ))}
+  {hasHalfStar && (
+    <img
+      key="half-star"
+      src={halfStarImg}
+      alt="반쪽별"
+      className="inline-block"
+      style={{ width: 18, height: 18, verticalAlign: 'text-bottom', display: 'inline-block',marginTop: 5}}
+    />
+  )}
+  {[...Array(emptyStars)].map((_, i) => (
+    <span
+      key={`empty-${i}`}
+      className="text-gray-300 text-[20px]"
+      style={{ lineHeight: 1, verticalAlign: 'middle', display: 'inline-block' }}
+    >
+      ★
+    </span>
+  ))}
+</div>
+
       </div>
 
       {/* 2. 공부 기간 + 좋아요 + 작성 시간 */}
@@ -106,7 +123,6 @@ const LatestReviewCard: React.FC<LatestReviewCardProps> = ({ review, onClick }) 
           <span>{likesCount}</span>
         </div>
         <span className="ml-auto text-gray-400 text-xs whitespace-nowrap">
-          {/* 예시로 '방금 전'을 넣었지만, 실제 작성시간에 맞게 변환해서 표시하세요 */}
           {review.createdAt ? new Date(review.createdAt).toLocaleDateString() : "방금 전"}
         </span>
       </div>

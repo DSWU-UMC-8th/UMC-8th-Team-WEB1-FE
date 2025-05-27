@@ -1,21 +1,21 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import ReviewArrowImg from "../../assets/reviewdetail.png";
+import halfStarImg from "../../assets/halfstar.png";
 
 interface RatingBarProps {
   label: string;
   count: number;
   maxCount: number;
 }
-
 const RatingBar: React.FC<RatingBarProps> = ({ label, count, maxCount }) => {
   const percent = maxCount > 0 ? (count / maxCount) * 100 : 0;
   return (
     <div className="flex items-center text-sm text-gray-700 mb-1">
       <div className="w-24">{label}</div>
-      <div className="flex-1 h-4 bg-green-100 rounded-full mx-2 overflow-hidden">
+      <div className="flex-1 h-3 bg-[#CAE3A5] rounded-full mx-2 overflow-hidden">
         <div
-          className="h-4 bg-green-600 rounded-full"
-          style={{ width: `${percent}%` }}
+          className="h-3 rounded-full"
+          style={{ width: `${percent}%`, backgroundColor: '#6FA235' }}
         />
       </div>
       <div className="w-6 text-right">{count}</div>
@@ -24,8 +24,6 @@ const RatingBar: React.FC<RatingBarProps> = ({ label, count, maxCount }) => {
 };
 
 const ReviewSummaryPage: React.FC = () => {
-  const navigate = useNavigate();
-
   const averageScore = 4.25;
   const totalReviews = 25;
   const ratingCounts = {
@@ -37,11 +35,12 @@ const ReviewSummaryPage: React.FC = () => {
   };
 
   const fullStars = Math.floor(averageScore);
-  const halfStar = averageScore - fullStars >= 0.5;
+  const halfStar = averageScore - fullStars > 0;  // 0.25 이상이면 반별 표시
+
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="flex justify-center items-center p-8 rounded-lg gap-12 max-w-3xl w-full">
+    <div className="mt-8 bg-gray-50 flex items-center justify-center p-4">
+      <div className="flex justify-center items-center p-4 rounded-lg gap-12 w-[995px] h-[219px]">
         {/* 좌측 별점 및 리뷰 개수 */}
         <div className="flex flex-col items-center space-y-3 w-48">
           <div className="text-3xl font-semibold text-gray-700">
@@ -49,36 +48,41 @@ const ReviewSummaryPage: React.FC = () => {
           </div>
           <div className="flex space-x-1">
             {[...Array(5)].map((_, i) => {
-              if (i < fullStars)
-                return (
-                  <span key={i} className="text-green-500 text-3xl">
-                    ★
-                  </span>
-                );
-              else if (i === fullStars && halfStar)
-                return (
-                  <span key={i} className="text-green-500 text-3xl">
-                    ☆{/* 반별은 SVG로 대체 가능 */}
-                  </span>
-                );
-              else
-                return (
-                  <span key={i} className="text-gray-300 text-3xl">
-                    ★
-                  </span>
-                );
-            })}
+  if (i < fullStars) {
+    // 채워진 별 - 초록색
+    return <span key={i} className="text-3xl text-[#B4D780]">★</span>;
+  } else if (i === fullStars && halfStar) {
+    // 반쪽별 이미지
+    return (
+      <img
+        key={i}
+        src={halfStarImg}
+        alt="반쪽별"
+        style={{
+          width: 27,
+          height: 27,
+          verticalAlign: "text-bottom",
+          display: "inline-block",
+          marginTop: 7,
+        }}
+      />
+    );
+  } else {
+    // 빈 별 - 회색
+    return <span key={i} className="text-3xl text-gray-300">★</span>;
+  }
+})}
+
           </div>
           <div className="text-sm font-medium text-green-700">
             {totalReviews}개의 리뷰가 있습니다.
           </div>
-          <button
-            className="px-4 py-1 text-xs font-semibold bg-gray-300 rounded hover:bg-gray-400"
-            onClick={() => navigate("/reviews")}
-            type="button"
-          >
-            상세 리뷰 보러가기 &gt;
-          </button>
+          <img
+            src={ReviewArrowImg}
+            alt="상세 리뷰 보러가기"
+            className="cursor-pointer"
+            style={{ width: "256px", height: "40px" }}
+          />
         </div>
 
         {/* 우측 평점별 막대 */}

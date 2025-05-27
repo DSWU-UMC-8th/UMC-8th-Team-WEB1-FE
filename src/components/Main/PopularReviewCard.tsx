@@ -1,4 +1,5 @@
 import React from "react";
+import halfStarImg from "../../assets/halfstar.png"; // 반쪽별 이미지 경로 맞게 수정
 
 interface PopularReviewCardProps {
   reviewId: number;
@@ -21,6 +22,7 @@ const PopularReviewCard: React.FC<PopularReviewCardProps> = ({
 }) => {
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating - fullStars >= 0.5;
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
   return (
     <div
@@ -32,15 +34,14 @@ const PopularReviewCard: React.FC<PopularReviewCardProps> = ({
         if (e.key === "Enter") onClick?.();
       }}
     >
-      {" "}
       <h3 className="text-lg font-bold mb-2">{lectureTitle}</h3>
       <div className="flex items-center mb-2">
         {/* 꽉 찬 별 */}
         {[...Array(fullStars)].map((_, i) => (
           <span
-            key={i}
-            className="text-xl relative inline-block text-[#B4D780] [webkit-text-stroke:1px_#B4D780]"
-            style={{ width: "1em", textAlign: "center" }}
+            key={`full-${i}`}
+            className="text-xl"
+            style={{ color: "#B4D780", width: "1em", textAlign: "center", lineHeight: 1 }}
           >
             ★
           </span>
@@ -48,30 +49,21 @@ const PopularReviewCard: React.FC<PopularReviewCardProps> = ({
 
         {/* 반쪽 별 */}
         {hasHalfStar && (
-          <span
+          <img
             key="half-star"
-            className="relative inline-block text-xl text-transparent
-               [webkit-text-stroke:1px_#B4D780] w-4 text-center"
-            style={{ width: "1em" }}
-          >
-            {/* 반쪽 색 채움 */}
-            <span
-              className="absolute overflow-hidden top-0 left-0 w-1/2 h-full
-                 text-[#B4D780] [webkit-text-stroke:0]"
-            >
-              ★
-            </span>
-            ★
-          </span>
+            src={halfStarImg}
+            alt="반쪽별"
+            className="inline-block"
+            style={{ width: 18, height: 18, marginLeft: 1, marginRight: 1, verticalAlign: "text-bottom" }}
+          />
         )}
 
         {/* 빈 별 */}
-        {[...Array(5 - fullStars - (hasHalfStar ? 1 : 0))].map((_, i) => (
+        {[...Array(emptyStars)].map((_, i) => (
           <span
             key={`empty-${i}`}
-            className="text-xl text-transparent
-               [webkit-text-stroke:1px_#B4D780] relative inline-block w-4 text-center"
-            style={{ width: "1em" }}
+            className="text-xl text-gray-300"
+            style={{ width: "1em", textAlign: "center", lineHeight: 1 }}
           >
             ★
           </span>
