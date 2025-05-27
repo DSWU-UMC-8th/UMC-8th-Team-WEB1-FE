@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
         </Link>
       </div>
 
-      <div className="flex items-center rounded-full px-4 py-2 w-full max-w-[400px] mt-4 md:mt-0">
+      <div className="flex items-center rounded-full px-4 py-2 w-full max-w-[400px] mt-4 md:mt-0 bg-white">
         <button onClick={handleSearch} className="mr-2">
           <img src={SearchIcon} alt="Search" className="w-5 sm:w-4" />
         </button>
@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="검색어를 입력해 주세요"
-          className="flex-1 bg-transparent outline-none text-sm text-gray-500 placeholder:text-gray-400"
+          className="flex-1 bg-transparent outline-none text-sm text-gray-500 placeholder:text-gray-400 "
         />
       </div>
     </nav>

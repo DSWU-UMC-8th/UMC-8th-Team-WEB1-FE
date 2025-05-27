@@ -22,7 +22,7 @@ const PopularReviewsList = () => {
   ];
 
   return (
-    <div className="px-4 py-8 bg-gray-50">
+    <div className="px-4 py-8 bg-[#f7f8f9]">
       <h2 className="text-2xl font-semibold mb-6">인기 리뷰</h2>
       <div className="flex flex-wrap gap-6">
         {reviewList.map((review, index) => (
