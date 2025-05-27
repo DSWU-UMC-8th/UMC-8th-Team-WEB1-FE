@@ -19,6 +19,8 @@ const Navbar: React.FC = () => {
       setActiveMenu("/reviews/popular");
     } else if (path.startsWith("/reviews/latest")) {
       setActiveMenu("/reviews/latest");
+    } else if (path === "/" || path === "/dashboard") {
+      setActiveMenu("/");
     } else if (path.startsWith("/reviews")) {
       setActiveMenu("/reviews");
     } else {
@@ -33,13 +35,13 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-[#F7F8F9] px-4 md:px-12 py-4 flex flex-wrap justify-between items-center w-full font-[Pretendard]">
       <div className="flex items-center gap-6 md:gap-16 flex-wrap">
-        <Link to="/">
+        <Link to="/#">
           <img src={LogoImage} alt="Logo" className="w-[200px] min-w-[160px]" />
         </Link>
         <Link
-          to="/reviews"
-          onClick={() => handleMenuClick("/reviews")}
-          className={activeMenu === "/reviews" ? "bg-[#c0e5c7] rounded-md" : ""}
+          to="/"
+          onClick={() => handleMenuClick("/")}
+          className={activeMenu === "/" ? "bg-[#c0e5c7] rounded-md" : ""}
         >
           <img
             src={Dashboard}
