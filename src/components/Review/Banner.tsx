@@ -9,7 +9,7 @@ import Banner2 from "../../assets/list2.png";
 
 const Banner: React.FC = () => {
   const images = [Banner1, Banner2];
-  const lectureIds = [15, 57];
+  const reviewIds = [15, 57];
 
   const [current, setCurrent] = useState(0);
   const sliderRef = useRef<Slider>(null);
@@ -32,10 +32,10 @@ const Banner: React.FC = () => {
     sliderRef.current?.slickGoTo(index);
   };
 
-  const onBannerClick = (index: number) => {
-    const lectureId = lectureIds[index];
-    navigate(`/lectures/${lectureId}`);
-  };
+const onBannerClick = (index: number) => {
+  const reviewId = reviewIds[index];
+  navigate(`/reviews/${reviewId}`);
+};
 
   return (
     <div className="w-full mx-auto relative overflow-visible">

@@ -11,7 +11,8 @@ import Banner4 from "../../assets/banner4.png";
 
 const Banner: React.FC = () => {
   const images = [Banner1, Banner2, Banner3, Banner4];
-  const lectureIds = [15, 42, 34, 57];
+  const reviewIds = [19, 23, 34, 45]; // 예시 reviewId 배열
+
 
   const [current, setCurrent] = useState(0);
   const sliderRef = useRef<Slider>(null);
@@ -34,10 +35,11 @@ const Banner: React.FC = () => {
     sliderRef.current?.slickGoTo(index);
   };
 
-  const onBannerClick = (index: number) => {
-    const lectureId = lectureIds[index];
-    navigate(`/lectures/${lectureId}`);
-  };
+const onBannerClick = (index: number) => {
+  const reviewId = reviewIds[index];
+  navigate(`/reviews/${reviewId}`);
+};
+
 
   return (
     <div className="w-[87%] mx-auto relative overflow-visible">
