@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LatestReviewCard from "./LatestReviewCard";
 import { fetchLatestReviews } from "../../api/review";
+import { useNavigate } from "react-router-dom";
 
 interface Review {
   reviewId: number;
@@ -13,6 +14,8 @@ interface Review {
 }
 
 const LatestReviewsList: React.FC = () => {
+    const navigate = useNavigate();
+
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -41,20 +44,35 @@ const LatestReviewsList: React.FC = () => {
   }, []);
 
   if (loading) return <p className="text-center py-10">로딩 중...</p>;
-  if (error) return <p className="text-center py-10 text-red-600">{error}</p>;
+  if (error)
+    return (
+      <p className="text-center py-10 text-red-600" role="alert">
+        {error}
+      </p>
+    );
   if (reviews.length === 0)
     return <p className="text-center py-10">리뷰가 없습니다.</p>;
 
   return (
-    <section className="my-10 max-w-[1290px] mx-auto mt-10 w-full">
-        <h2 className="text-2xl font-semibold mb-6">최신 리뷰</h2>
+    <section className="my-10 max-w-[1290px] mx-auto w-full">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-semibold">최신 리뷰</h2>
+        <button
+          type="button"
+          className="text-sm text-gray-500 hover:text-gray-800 transition"
+          onClick={() => {
+            navigate("/review/latest");
+          }}
+        >
+          전체보기 &gt;
+        </button>
+      </div>
+
       {reviews.map((review) => (
         <LatestReviewCard key={review.reviewId} review={review} />
       ))}
     </section>
   );
-
-
 };
 
 export default LatestReviewsList;
