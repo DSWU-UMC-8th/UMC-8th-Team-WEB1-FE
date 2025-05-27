@@ -14,26 +14,46 @@ interface Review {
   teacher: string;
 }
 
+interface PopularReviewsListProps {
+  category: string;
+  difficulty: string;
+  entryPeriod: string;
+}
+
 const API_BASE_URL = import.meta.env.VITE_SERVER_API_URL;
 
-const PopularReviewsList: React.FC = () => {
+const PopularReviewsList: React.FC<PopularReviewsListProps> = ({
+  category,
+  difficulty,
+  entryPeriod,
+}) => {
   const navigate = useNavigate();
 
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // API 호출 함수: 컴포넌트 내부에 위치시키고 상태 변경 함수 사용
+  // 필터 포함 API 호출 함수
   const fetchPopularReviews = async (pageNumber = 0) => {
     setLoading(true);
     setError(null);
+
     try {
+      // URLSearchParams를 사용해 쿼리 파라미터 생성
+      const params = new URLSearchParams();
+      if (category) params.append("category", category);
+      if (difficulty) params.append("level", difficulty);
+      if (entryPeriod) params.append("studyTime", entryPeriod);
+      params.append("pageNumber", pageNumber.toString());
+
       const response = await fetch(
-        `${API_BASE_URL}/api/reviews/popular?pageNumber=${pageNumber}`
+        `${API_BASE_URL}/api/reviews/popular?${params.toString()}`
       );
+
       if (!response.ok) {
         throw new Error(`API 오류: ${response.status} ${response.statusText}`);
       }
+
       const data = await response.json();
       setReviews(data.result || []);
     } catch (err: any) {
@@ -43,9 +63,10 @@ const PopularReviewsList: React.FC = () => {
     }
   };
 
+  // 필터가 바뀔 때마다 API 재호출
   useEffect(() => {
     fetchPopularReviews(0);
-  }, []);
+  }, [category, difficulty, entryPeriod]);
 
   if (loading) return <p className="text-center py-10">로딩 중...</p>;
   if (error)

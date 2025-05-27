@@ -13,8 +13,18 @@ interface Review {
   createdAt: string | null;
 }
 
-const LatestReviewsList: React.FC = () => {
-    const navigate = useNavigate();
+interface LatestReviewsListProps {
+  category: string;
+  difficulty: string;
+  entryPeriod: string;
+}
+
+const LatestReviewsList: React.FC<LatestReviewsListProps> = ({
+  category,
+  difficulty,
+  entryPeriod,
+}) => {
+  const navigate = useNavigate();
 
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(false);
@@ -26,9 +36,9 @@ const LatestReviewsList: React.FC = () => {
 
     try {
       const data = await fetchLatestReviews({
-        category: "",
-        level: "",
-        studyTime: "",
+        category,
+        level: difficulty,
+        studyTime: entryPeriod,
         pageNumber: 0,
       });
       setReviews(data);
@@ -39,9 +49,10 @@ const LatestReviewsList: React.FC = () => {
     }
   };
 
+  // 필터가 바뀔 때마다 최신 리뷰 재조회
   useEffect(() => {
     loadReviews();
-  }, []);
+  }, [category, difficulty, entryPeriod]);
 
   if (loading) return <p className="text-center py-10">로딩 중...</p>;
   if (error)
@@ -69,13 +80,12 @@ const LatestReviewsList: React.FC = () => {
       </div>
 
       {reviews.map((review) => (
-  <LatestReviewCard
-    key={review.reviewId}
-    review={review}
-    onClick={() => navigate(`/reviews/${review.reviewId}`)}
-  />
-))}
-
+        <LatestReviewCard
+          key={review.reviewId}
+          review={review}
+          onClick={() => navigate(`/reviews/${review.reviewId}`)}
+        />
+      ))}
     </section>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Banner from "./Banner";
+import { useLocation } from "react-router-dom";
 
 interface Option {
   label: string;
@@ -105,23 +106,40 @@ const Dropdown: React.FC<{
   );
 };
 
-const ReviewListTop: React.FC = () => {
+interface ReviewListTopProps {
+  onFilterChange: (filters: {
+    category: string;
+    difficulty: string;
+    entryPeriod: string;
+  }) => void;
+}
+
+const ReviewListTop: React.FC<ReviewListTopProps> = ({ onFilterChange }) => {
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [entryPeriod, setEntryPeriod] = useState("");
+
+  const location = useLocation();
 
   const resetFilters = () => {
     setCategory("");
     setDifficulty("");
     setEntryPeriod("");
+    onFilterChange({ category: "", difficulty: "", entryPeriod: "" }); // ← 여기서 에러 발생
   };
+
+  useEffect(() => {
+    onFilterChange({ category, difficulty, entryPeriod });
+  }, [category, difficulty, entryPeriod]);
+
+  // 현재 경로에 따라 버튼 텍스트 및 SVG 경로 조정
+  const isPopularPage = location.pathname === "/reviews/popular";
+  const isLatestPage = location.pathname === "/reviews/latest";
 
   return (
     <div className="bg-[#F7F8F9] w-[87%] mx-auto">
-      {/* 배너 및 홍보 문구 */}
       <Banner />
 
-      {/* 필터 영역 */}
       <div className="flex items-center justify-between mt-5 mb-5">
         <div className="flex items-center gap-3 font-[Pretendard]">
           <Dropdown
@@ -151,23 +169,26 @@ const ReviewListTop: React.FC = () => {
           </button>
         </div>
 
-        <button className="flex items-center gap-1 text-sm font-medium text-[#2b2b2b] hover:text-gray-500 select-none cursor-pointer">
-          인기순
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-            />
-          </svg>
-        </button>
+        {(isPopularPage || isLatestPage) && (
+          <button className="flex items-center gap-1 text-sm font-medium text-[#2b2b2b] hover:text-gray-500 select-none cursor-pointer">
+            {isPopularPage && "인기순"}
+            {isLatestPage && "최신순"}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+              />
+            </svg>
+          </button>
+        )}
       </div>
     </div>
   );
