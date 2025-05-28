@@ -6,6 +6,8 @@ import Main from "./pages/Main";
 import Reviews from "./pages/Review/Reviews";
 import ReviewLatest from "./pages/Review/Review_latest";
 import ReviewPopular from "./pages/Review/Review_popular";
+import SearchResultList from "./components/Main/LatestReviewsList";
+import ReviewSearchResultList from "./components/Main/SearchList";
 
 const router = createBrowserRouter([
   {
@@ -17,19 +19,23 @@ const router = createBrowserRouter([
         index: true,
         element: <Main />,
       },
-      
-        {
-        path: "reviews/latest",  
+
+      {
+        path: "reviews/latest",
         element: <ReviewLatest />,
       },
-       {
-        path: "reviews/popular",  
+      {
+        path: "reviews/popular",
         element: <ReviewPopular />,
       },
-  
-        {
-        path: "reviews/:reviewId",  
+
+      {
+        path: "reviews/:reviewId",
         element: <Reviews />,
+      },
+      {
+        path: "search",
+        element: <ReviewSearchResultList />,
       },
     ],
   },
