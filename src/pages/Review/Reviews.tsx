@@ -2,7 +2,7 @@ import StarSection from "../../components/Review/ReviewSummaryPage";
 import BannerSection from "../../components/Main/Banner";
 
 import ReviewBottom from "../../components/Review/ReviewBottom";
-import ReviewDetail from "../../components/Main/LatestReviewsList";
+import Reviewdetail from "../../components/Review/ReviewDetail";
 
 const Reviews = () => {
   return (
@@ -10,7 +10,7 @@ const Reviews = () => {
       <BannerSection />
 <StarSection />
 <ReviewBottom />
-<ReviewDetail />
+<Reviewdetail />
     </div>
   );
 };

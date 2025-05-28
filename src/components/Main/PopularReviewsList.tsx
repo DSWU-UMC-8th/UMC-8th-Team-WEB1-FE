@@ -79,7 +79,7 @@ const PopularReviewsList = () => {
           type="button"
           className="text-sm text-gray-500 hover:text-gray-800 transition  cursor-pointer"
           onClick={() => {
-            navigate("/reviews/latest");
+            navigate("/reviews/popular");
           }}
         >
           전체보기 &gt;
