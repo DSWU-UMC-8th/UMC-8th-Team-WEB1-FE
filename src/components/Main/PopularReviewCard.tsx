@@ -53,7 +53,7 @@ const PopularReviewCard: React.FC<PopularReviewCardProps> = ({
             key="half-star"
             src={halfStarImg}
             alt="반쪽별"
-            className="inline-block"
+            className="inline-block mb-0.5"
             style={{ width: 18, height: 18, marginLeft: 1, marginRight: 1, verticalAlign: "text-bottom" }}
           />
         )}

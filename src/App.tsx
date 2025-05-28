@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "reviews/:reviewId",
+        path: "reviews/:lectureId",  // 여기 lectureId로 변경
         element: <Reviews />,
       },
       {
