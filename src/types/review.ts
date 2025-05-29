@@ -1,11 +1,18 @@
-export interface Review {
-  reviewId: number;
-  rate: number;
-  studyTime: string;
-  likes: number;
-  content: string;
-  imageUrl: string | null;
-  createdAt: string | null;
+import { StudyPeriod } from "../enums/StudyPeriod";
+
+export interface ReviewLectureInfo {
+  name: string;
+  instructorName: string;
+  platformId: number | null;
+  level: "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
+  category: "IT" | "DESIGN" | "BUSINESS" | "ETC";
 }
 
-
+export interface ReviewRequest {
+  lectureId: number | null;
+  lecture: ReviewLectureInfo;
+  platformIds: (number | null)[];
+  rating: number;
+  content: string;
+  studyPeriod: StudyPeriod;
+}
