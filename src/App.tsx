@@ -6,7 +6,7 @@ import Main from "./pages/Main";
 import Reviews from "./pages/Review/Reviews";
 import ReviewLatest from "./pages/Review/Review_latest";
 import ReviewPopular from "./pages/Review/Review_popular";
-import SearchResultList from "./components/Main/LatestReviewsList";
+import ReviewCreate from "./pages/ReviewCreate";
 import ReviewSearchResultList from "./components/Main/SearchList";
 
 const router = createBrowserRouter([
@@ -30,12 +30,16 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "reviews/:lectureId",  // 여기 lectureId로 변경
+        path: "reviews/:lectureId",
         element: <Reviews />,
       },
       {
         path: "search",
         element: <ReviewSearchResultList />,
+      },
+      {
+        path: "create",
+        element: <ReviewCreate />,
       },
     ],
   },
