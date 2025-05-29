@@ -18,7 +18,7 @@ const PopularReviewsList = () => {
     setError(null);
     try {
       const response = await fetch(
-        `${API_BASE_URL}/api/reviews/popular?pageNumber=0`
+        `${API_BASE_URL}/reviews/popular?pageNumber=0`
       );
       if (!response.ok) {
         throw new Error(`API 오류: ${response.status} ${response.statusText}`);

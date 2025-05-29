@@ -47,7 +47,7 @@ const PopularReviewsList: React.FC<PopularReviewsListProps> = ({
       params.append("pageNumber", pageNumber.toString());
 
       const response = await fetch(
-        `${API_BASE_URL}/api/reviews/popular?${params.toString()}`
+        `${API_BASE_URL}/reviews/popular?${params.toString()}`
       );
 
       if (!response.ok) {
